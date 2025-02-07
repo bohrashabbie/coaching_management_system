@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_information,student.information,model_student_information,,1,1,1,1
+access_tutord_details,tutuors.details,model_tutors_details,,1,1,1,1
+access_subject_details,subject.details,model_subject_details,,1,1,1,1
+access_onboard_students,onboard.student,model_onboard_student,,1,1,1,1

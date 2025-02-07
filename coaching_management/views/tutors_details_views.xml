@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View for Student -->
+    <record id="view_tutors_details_form" model="ir.ui.view">
+        <field name="name">tutors.details.form</field>
+        <field name="model">tutors.details</field>
+        <field name="arch" type="xml">
+            <form string="Tutors Information">
+                <sheet>
+                    <field name="tutors_image" widget="image" class="oe_avatar" options="{'size': [150, 150]}"/>
+                <h1>
+                    <field name = "tutors_name" string = "Tutors Name"/>
+                </h1>
+                    <group>
+                        <group>
+                            <field name = "last_name" string = "Last Name"/>
+                            <field name = "tutor_unique_id" string = "Tutor Unique Name"/>
+                            <field name="tutors_email"/>
+                            <field name = "tutors_phone"/>
+                        </group>
+                        <group>
+                            <field name="tutors_gender"/>
+                            <field name="tutors_age"/>
+                            <field name="birth_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="student Fees Description">
+                            <group>
+                            <field name = "tutors_class"/>
+                            <field name  = "tutors_salary"/>
+                            </group>
+                        </page>
+                        <page string = "Students">
+                            <field name = "students"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Kanban View for Student -->
+<record id="tutors_details_kanban_view" model="ir.ui.view">
+    <field name="name">tutors.details.kanban</field>
+    <field name="model">tutors.details</field>
+    <field name="arch" type="xml">
+        <kanban class="o_kanban_mobile" sample="1" quick_create="false">
+            <field name="tutors_image"/>
+            <field name="tutors_email"/>
+            <templates>
+                <t t-name="card">
+                    <div class="d-flex mb-2">
+                        <!-- Student image on the left side -->
+                        <div class="oe_avatar_container" style="width: 120px; height: 120px; margin-right: 15px;">
+                            <field name="tutors_image" widget="image" class="oe_avatar" options="{'size': [120, 120]}"/>
+                        </div>
+                        
+                        <!-- Right side with student name and email -->
+                        <div class="flex-grow-1">
+                            <strong class="text-dark fs-5">
+                                <field name= "tutors_name" string = "Tutor Name"/>
+                            </strong>
+                            <div class="text-muted">
+                                <field name="tutors_email" string = "Email Id"/>
+                            </div>
+                            <div>
+                                <field name = "tutors_phone" />
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+
+
+    <!-- Tree/List View for Student -->
+    <record id="view_tutors_details_tree" model="ir.ui.view">
+        <field name="name">tutors.details.tree</field>
+        <field name="model">tutors.details</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="tutors_name" string="Tutors Name"/>
+                <field name="tutors_class" string="Class"/>
+                <field name="birth_date" string="Date of Birth"/>
+                <field name="tutors_age" string="Age"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Window Action -->
+    <record id="action_tutors_details" model="ir.actions.act_window">
+        <field name="name">Tutors Information</field>
+        <field name="res_model">tutors.details</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+    <!-- Menu Structure -->
+    <menuitem id="college_information_main_menu" name="Coaching Management" sequence="1"/>
+    <menuitem id="tutors_details_main_menu" name="Tutors" parent="college_information_main_menu"  sequence="5"/>
+    <menuitem id="tutors_details_sub_menu" name="Tutors Information" parent="tutors_details_main_menu" action="action_tutors_details"/>
+</odoo>

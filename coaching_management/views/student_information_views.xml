@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View for Student -->
+    <record id="view_student_information_form" model="ir.ui.view">
+        <field name="name">student.information.form</field>
+        <field name="model">student.information</field>
+        <field name="arch" type="xml">
+            <form string="Student Information">
+                <sheet>
+                    <field name="student_image" widget="image" class="oe_avatar" options="{'size': [150, 150]}"/>
+                <h1>
+                    <field name = "student_name" string = "Student Name"/>
+                </h1>
+                    <group>
+                        <group>
+                            <field name = "last_name" string = "Last Name"/>
+                            <field name = "unique_id"/>
+                            <field name="student_email"/>
+                            <field name = "student_phone"/>
+                        </group>
+                        <group>
+                            <field name="student_gender"/>
+                            <field name="age"/>
+                            <field name="birth_date"/>
+                            <field name = "confirm_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Student Fees Description">
+                            <group>
+                            <field name = "subject_associate" widget="many2many_checkboxes"/>
+                            <field name = "student_class"/>
+                            <field name  = "student_fees"/>
+                            <button id = "button_verify_onboard" name = "action_verify_wizard_button" string = "verify"
+                            class = "btn-primary"  type = "object"/> 
+                            </group>
+                        </page>
+                        <page>
+                            <field name = "teachers"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Kanban View for Student -->
+<record id="student_information_kanban_view" model="ir.ui.view">
+    <field name="name">student.information.kanban</field>
+    <field name="model">student.information</field>
+    <field name="arch" type="xml">
+        <kanban class="o_kanban_mobile" sample="1" quick_create="false">
+            <field name="student_image"/>
+            <field name="student_image"/>
+            <field name="student_email"/>
+            <templates>
+                <t t-name="card">
+                    <div class="d-flex mb-2">
+                        <!-- Student image on the left side -->
+                        <div class="oe_avatar_container" style="width: 120px; height: 120px; margin-right: 15px;">
+                            <field name="student_image" widget="image" class="oe_avatar" options="{'size': [120, 120]}"/>
+                        </div>
+                        
+                        <!-- Right side with student name and email -->
+                        <div class="flex-grow-1">
+                            <strong class="text-dark fs-5">
+                                <field name= "student_name" string = "Name"/>
+                            </strong>
+                            <div class="text-muted">
+                                <field name="student_email" string = "Email Id"/>
+                            </div>
+                            <div>
+                                <field name = "student_phone" />
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+
+
+    <!-- Tree/List View for Student -->
+    <record id="view_student_information_tree" model="ir.ui.view">
+        <field name="name">student.information.tree</field>
+        <field name="model">student.information</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_name" string="Student Name"/>
+                <field name="student_class" string="Class"/>
+                <field name="birth_date" string="Date of Birth"/>
+                <field name="age" string="Age"/>
+                <field name="onboarding_status"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Window Action -->
+    <record id="action_student_information" model="ir.actions.act_window">
+        <field name="name">Student information</field>
+        <field name="res_model">student.information</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+    <!-- Menu Structure -->
+    <menuitem id="college_information_main_menu" name="College Management" sequence="1"/>
+    <menuitem id="student_information_menu" name="Students" parent="college_information_main_menu"  sequence="2"/>
+    <menuitem id="Student_information_sub_menu" name="Student Information" parent="student_information_menu" action="action_student_information"/>
+</odoo>
