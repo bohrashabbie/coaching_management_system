@@ -11,7 +11,6 @@ class TutorsDetails(models.Model):
     tutors_image = fields.Image(string="", max_height=0, max_weidth=0)
     tutors_class = fields.Selection([('10th', '10th'), ('11th', '11th'), ('12th', '12th')], string="Class")
     tutor_unique_id = fields.Integer(string="Unique Id")
-    # student_associated = fields.Many2many('student.details')
     tutors_email = fields.Char(string="Email Id")
     tutors_phone = fields.Char(string = "Phone No.")
     tutors_gender = fields.Selection([("male","Male"),("female","Female"),("other","other")],string="Gender")
